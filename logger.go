@@ -182,3 +182,21 @@ func (s *StdLogAdapter) Println(v ...interface{}) {
 func (s *StdLogAdapter) Printf(format string, v ...interface{}) {
 	s.out.Printf(format, v...)
 }
+
+func Nop() Logger {
+	return &nop{}
+}
+
+type nop struct{}
+
+func (n *nop) With(args ...interface{}) Logger        { return n }
+func (n *nop) Debug(v ...interface{})                 {}
+func (n *nop) Debugf(format string, v ...interface{}) {}
+func (n *nop) Info(v ...interface{})                  {}
+func (n *nop) Infof(format string, v ...interface{})  {}
+func (n *nop) Warn(v ...interface{})                  {}
+func (n *nop) Warnf(format string, v ...interface{})  {}
+func (n *nop) Error(v ...interface{})                 {}
+func (n *nop) Errorf(format string, v ...interface{}) {}
+func (n *nop) Fatal(v ...interface{})                 {}
+func (n *nop) Fatalf(format string, v ...interface{}) {}
